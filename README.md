@@ -42,7 +42,7 @@ if work under development mode, use .env file to set the client ID and client se
 
 an also
 
-#####<i>you will use serverless framework to deploy the server with <u>secretenv.json</u> file.</i>
+####<i>you will use serverless framework to deploy the server with <u>secretenv.json</u> file.</i>
 
 
 Open a web browser and navigate to
