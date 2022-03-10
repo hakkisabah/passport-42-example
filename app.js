@@ -1,5 +1,8 @@
 // Don't forget to the env variable FORTYTWO_CLIENT_ID and FORTYTWO_CLIENT_SECRET
 
+if (process.env.NODE_ENV === 'development') {
+  require('dotenv').config(); // if use npm run dev, need for .env file
+}
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
@@ -21,7 +24,7 @@ var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 passport.use(new FortyTwoStrategy({
   clientID: process.env.FORTYTWO_CLIENT_ID,
   clientSecret: process.env.FORTYTWO_CLIENT_SECRET,
-  callbackURL: 'http://127.0.0.1:3000/login/42/return'
+  callbackURL: process.env.CALLBACK_URL
 },
 function(accessToken, refreshToken, profile, cb) {
   // In this example, the user's 42 profile is supplied as the user

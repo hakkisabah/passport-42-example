@@ -1,0 +1,25 @@
+service: Auth-42
+provider:
+  name: aws
+  runtime: nodejs14.x
+  memorySize: 128
+  timeout: 10
+  stage: api
+  region: eu-central-1
+  lambdaHashingVersion: 20201221
+functions:
+  api:
+    handler: lambda.universal
+    events:
+      - http: ANY /
+      - http: ANY /{proxy+}
+    environment:
+      FORTYTWO_CLIENT_ID: ${self:custom.secrets.FORTYTWO_CLIENT_ID}
+      FORTYTWO_CLIENT_SECRET: ${self:custom.secrets.FORTYTWO_CLIENT_SECRET}
+      PORT: ${self:custom.secrets.PORT}
+      CALLBACK_URL: ${self:custom.secrets.CALLBACK_URL}
+custom:
+  secrets: ${file(secretenv.json)}
+  apigwBinary :
+    types :
+      - '*/*'
